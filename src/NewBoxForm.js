@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 class NewBoxForm extends Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class NewBoxForm extends Component {
     this.state = {
       width: "",
       height: "",
-      backGroundColor: "",
+      color: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -22,12 +23,12 @@ class NewBoxForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    const newBox = { ...this.state, id: uuid() };
+    const newBox = { ...this.state, id: uuidv4() };
     this.props.createBox(newBox);
     this.setState({
       width: "",
       height: "",
-      backGroundColor: "",
+      color: "",
     });
   }
 
@@ -49,11 +50,11 @@ class NewBoxForm extends Component {
             value={this.state.height}
             onChange={this.handleChange}
           />
-          <label htmlfor="backGroundColor">Backgound Color: </label>
+          <label htmlfor="color">Backgound Color: </label>
           <input
-            id="backgroundColor"
-            name="backGroundColor"
-            value={this.state.backGroundColor}
+            id="color"
+            name="color"
+            value={this.state.color}
             onChange={this.handleChange}
           />
           <button>New Box↓↓↓</button>
