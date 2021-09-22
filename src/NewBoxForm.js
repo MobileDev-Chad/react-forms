@@ -9,6 +9,7 @@ class NewBoxForm extends Component {
       height: "",
       backGroundColor: "",
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -21,13 +22,19 @@ class NewBoxForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    
+    const newBox = { ...this.state, id: uuid() };
+    this.props.createBox(newBox);
+    this.setState({
+      width: "",
+      height: "",
+      backGroundColor: "",
+    });
   }
 
   render() {
     return (
-      <div className="NewBoxForm">
-        <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
+        <div className="NewBoxForm">
           <label htmlfor="width">Width: </label>
           <input
             id="width"
@@ -49,9 +56,9 @@ class NewBoxForm extends Component {
             value={this.state.backGroundColor}
             onChange={this.handleChange}
           />
-          <button>Submit!</button>
-        </form>
-      </div>
+          <button>New Box↓↓↓</button>
+        </div>
+      </form>
     );
   }
 }
